@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-word-list',
   template: `
       <div *ngFor="let word of arrWords">
-          <a routerLink="/word">{{ word.en }}</a>
+          <a routerLink="/word/{{ word.id }}">{{ word.en }}</a>
       </div>
   `
 })

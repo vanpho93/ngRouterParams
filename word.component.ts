@@ -1,11 +1,21 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-word',
-  template: '<h3>Word component</h3>'
+  template: '<h3>{{ word.en }}</h3><p>{{ word.vn }}</p>'
 })
 
-export class WordComponent {}
+export class WordComponent {
+  word: { id: number, en: string, vn: string, memorized: boolean };
+  constructor(private route: ActivatedRoute) {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const id = +params.get('id');
+      const index = WORDS.findIndex(e => e.id === id);
+      this.word = WORDS[index];
+    });
+  }
+}
 
 const WORDS = [
   { id: 1, en: 'action', vn: 'hành động', memorized: true },
